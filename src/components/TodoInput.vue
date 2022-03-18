@@ -8,7 +8,7 @@
       @input="handleInput"
       @keyup.13="addTodo"
     />
-    <button @click="addTodo" type="button">추가</button>
+    <button class="btn" @click="addTodo" type="button">추가</button>
   </div>
 </template>
 
@@ -35,4 +35,11 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  background-color: beige;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+}
+</style>

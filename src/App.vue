@@ -125,7 +125,6 @@ export default Vue.extend({
 
 <style scoped>
 .btn {
-  float: right;
   background-color: beige;
   border: none;
   border-radius: 10%;
