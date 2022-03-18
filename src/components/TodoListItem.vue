@@ -54,5 +54,6 @@ export default Vue.extend({
   background-color: beige;
   border: none;
   border-radius: 10%;
+  cursor: pointer;
 }
 </style>

@@ -22,6 +22,9 @@
           ></TodoListItem>
         </ul>
       </div>
+      <div>
+        <button class="btn" @click="removeAll" type="button">전체 삭제</button>
+      </div>
     </main>
   </div>
 </template>
@@ -63,6 +66,10 @@ export default Vue.extend({
     };
   },
   methods: {
+    removeAll() {
+      this.todoItems = [];
+      storage.save(this.todoItems);
+    },
     updateTodoText(value: string) {
       this.todoText = value;
     },
@@ -116,4 +123,12 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  float: right;
+  background-color: beige;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+}
+</style>
