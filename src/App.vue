@@ -18,6 +18,7 @@
             :index="index"
             :todoItem="todoItem"
             @remove="removeTodoItem"
+            @toggle="toggleItem"
           ></TodoListItem>
         </ul>
       </div>
@@ -47,12 +48,18 @@ const storage = {
   },
 };
 
+// 할일 객체의 타입
+export interface Todo {
+  title: string;
+  done: boolean;
+}
+
 export default Vue.extend({
   components: { TodoInput, TodoListItem },
   data() {
     return {
       todoText: "",
-      todoItems: [],
+      todoItems: [] as Todo[],
     };
   },
   methods: {
@@ -61,7 +68,11 @@ export default Vue.extend({
     },
     addTodoItem() {
       const value = this.todoText;
-      this.todoItems.push(value);
+      const todo: Todo = {
+        title: value,
+        done: false,
+      };
+      this.todoItems.push(todo);
       storage.save(this.todoItems);
       // localStorage.setItem(value, value);
       this.initTodoText();
@@ -74,9 +85,20 @@ export default Vue.extend({
     fetchTodoItems() {
       this.todoItems = storage.fetch();
     },
+
+    // 할 일 삭제
     removeTodoItem(index: number) {
       console.log("remove", index);
       this.todoItems.splice(index, 1);
+      storage.save(this.todoItems);
+    },
+
+    // 할 일 상태 변경
+    toggleItem(todoItem: Todo, index: number) {
+      this.todoItems.splice(index, 1, {
+        ...todoItem,
+        done: !todoItem.done,
+      });
       storage.save(this.todoItems);
     },
   },
