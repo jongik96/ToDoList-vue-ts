@@ -34,13 +34,13 @@ import TodoListItem from "./components/TodoListItem.vue";
 const STORAGE_KEY = "vue-todo-ts-v1";
 const storage = {
   // localStorage 에 저장할 데이터
-  save(todoItems: any[]) {
+  save(todoItems: Todo[]) {
     const parsed = JSON.stringify(todoItems);
     localStorage.setItem(STORAGE_KEY, parsed);
   },
 
   // 조회 api
-  fetch() {
+  fetch(): Todo[] {
     const todoItems = localStorage.getItem(STORAGE_KEY) || "[]";
     // 배열 문자열을 Object 형으로 변형
     const result = JSON.parse(todoItems);
@@ -58,7 +58,7 @@ export default Vue.extend({
   components: { TodoInput, TodoListItem },
   data() {
     return {
-      todoText: "",
+      todoText: "" as string,
       todoItems: [] as Todo[],
     };
   },
@@ -81,9 +81,17 @@ export default Vue.extend({
       this.todoText = "";
     },
 
-    // storage 에 할 일 담기
+    // 할일 조회
     fetchTodoItems() {
-      this.todoItems = storage.fetch();
+      this.todoItems = storage.fetch().sort((a, b) => {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title < b.title) {
+          return 1;
+        }
+        return 0;
+      });
     },
 
     // 할 일 삭제

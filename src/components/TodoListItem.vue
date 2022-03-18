@@ -1,9 +1,9 @@
 <template>
-  <li>
+  <li class="wrapper">
     <span class="item" :class="todoItemClass" @click="toggleItem">{{
       todoItem.title
     }}</span>
-    <button @click="removeItem">삭제</button>
+    <button class="btn" @click="removeItem">삭제</button>
   </li>
 </template>
 
@@ -34,11 +34,25 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.wrapper {
+  display: grid;
+  grid-template-columns: 6fr 1fr 5fr;
+  margin-bottom: 10px;
+}
 .item {
   cursor: pointer;
-  width: 100px;
+  border: 2px solid;
+  border-color: bisque;
+  border-radius: 10%;
+  margin-right: 10px;
 }
 .complete {
   text-decoration: line-through;
+}
+.btn {
+  float: right;
+  background-color: beige;
+  border: none;
+  border-radius: 10%;
 }
 </style>
