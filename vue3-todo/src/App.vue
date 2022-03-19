@@ -5,12 +5,23 @@
     </header>
     <main>
       <TodoInput v-model="todoText" @add="addTodoItem"></TodoInput>
+      <div>
+        <ul>
+          <TodoListItem
+            v-for="(todoItem, index) in todoItems"
+            :key="index"
+            :index="index"
+            :todoItem="todoItem"
+          ></TodoListItem>
+        </ul>
+      </div>
     </main>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import TodoListItem from "./components/TodoListItem.vue";
 import TodoInput from "./components/TodoInput.vue";
 
 const STORAGE_KEY = "vue3-todo";
@@ -35,7 +46,7 @@ export interface Todo {
 }
 
 export default defineComponent({
-  components: { TodoInput },
+  components: { TodoInput, TodoListItem },
   data() {
     return {
       todoText: "" as string,
