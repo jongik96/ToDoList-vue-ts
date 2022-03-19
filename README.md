@@ -1,4 +1,4 @@
-# vue-todo
+# vue2-todo
 
 #### 참고자료 : inflearn - vue-typescript (장기효) 강의
 
