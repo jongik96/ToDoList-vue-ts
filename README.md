@@ -1,13 +1,13 @@
 ## 목차
 
-#### [branch 설명](#1-브랜치)
+#### [branch 설명](#branch-info)
 
-#### [Options API 기반의 Vue2, Vue3 비교해보기](#2-optionsAPI)
+#### [Options API 기반의 Vue2, Vue3 비교해보기](#vue3-opt)
 
-#### [Vu3 - Options API 와 Composition API 비교해보기](#3-compositionAPI)
+#### [Vu3 - Options API 와 Composition API 비교해보기](#vue3-comp)
 
 
-#1 브랜치
+#Branch Info
 ## Branch Info
 
 #### vue2-complete : Vue2 + TypeScript  
@@ -20,7 +20,7 @@ TodoApp 을 위와 같은 기술을 적용해 제작했습니다.
 Vue 에 TypeScript 를 적용해보는 것, Vue2 와 Vue3 의 차이, 그리고 Vue3 의 Options API 와 Compositions API 의 차이를 이해하며 진행했습니다.
 
 
-#2 OptionsAPI
+#Vue3 Opt
 # TypeScript 를 적용해 Vue2, Vue3 만든 TodoApp 비교
 
 Inflearn 강좌 "Vue.js+TypeScript 완벽가이드" (장기효) 를 참고하며 제작한 **Vue2** 버전의 TodoApp 을 **Vue3 Options API** 기반으로 다시 제작해보았습니다.
@@ -181,16 +181,11 @@ Vue3 의 Composition API 를 학습하면서
 
 아래 글에서 OptionsAPI 와 Composition API 를 비교하는 글을 볼 수 있습니다.
 
- [Vue3 ) TodoApp 을 통한 OptionsAPI 와 Composition API 비교
+---
+======
+---
 
-Vue3 ) TodoApp 을 통한 OptionsAPI 와 Composition API 비교 같은 동작을 하는 TodoApp 을 각각 OptionsAPI 와 Composition API 를 이용해 제작했습니다. 전체 코드는 아래 링크를 통해 Github 에서 확인하실 수..
-
-jongik.tistory.com](https://jongik.tistory.com/71)
-
-
-
-#3 CompositionAPI
-
+#Vue3 Comp
 # Vue3 ) TodoApp 을 통한 OptionsAPI 와 Composition API 비교
 
 
