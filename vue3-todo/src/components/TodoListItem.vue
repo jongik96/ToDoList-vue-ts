@@ -8,25 +8,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 export default defineComponent({
+  name: "TodoListItem",
   props: {
     todoItem: Object,
     index: Number,
   },
-  computed: {
-    // style 조건
-    todoItemClass(): string | null {
-      return this.todoItem.done ? "complete" : null;
-    },
-  },
-  methods: {
-    removeItem() {
-      this.$emit("remove", this.index);
-    },
-    toggleItem() {
-      this.$emit("toggle", this.todoItem, this.index);
-    },
+  // computed: {
+  //   // style 조건
+  //   todoItemClass(): string | null {
+  //     return this.todoItem.done ? "complete" : null;
+  //   },
+  // },
+  // methods: {
+  //   removeItem() {
+  //     this.$emit("remove", this.index);
+  //   },
+  //   toggleItem() {
+  //     this.$emit("toggle", this.todoItem, this.index);
+  //   },
+  // },
+  setup(props, context) {
+    const removeItem = () => {
+      context.emit("remove", props.index);
+    };
+    const toggleItem = () => {
+      context.emit("toggle", props.todoItem, props.index);
+    };
+    const todoItemClass = computed(() => {
+      return props.todoItem.done ? "complete" : null;
+    });
+    return { todoItemClass, removeItem, toggleItem };
   },
 });
 </script>

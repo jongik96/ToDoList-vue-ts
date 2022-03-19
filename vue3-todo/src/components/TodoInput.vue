@@ -13,19 +13,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  props: ["modelValue"],
-  methods: {
-    // TodoInput 컴포넌트에서 입력하지만 입력한 데이터는 App.vue 에서 관리된다.
-    onInput(event) {
-      this.$emit("update:modelValue", event.target.value);
-    },
+// import { defineComponent } from "vue";
+// export default defineComponent({
+//   props: ["modelValue"],
+//   methods: {
+//     // TodoInput 컴포넌트에서 입력하지만 입력한 데이터는 App.vue 에서 관리된다.
+//     onInput(event) {
+//       this.$emit("update:modelValue", event.target.value);
+//     },
+//     // 추가 버튼 이벤트
+//     addTodo() {
+//       this.$emit("add");
+//     },
+//   },
+// });
 
-    // 추가 버튼 이벤트
-    addTodo() {
-      this.$emit("add");
-    },
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "TodoInput",
+  props: ["modelValue"],
+
+  setup(props, context) {
+    const onInput = (event) => {
+      context.emit("update:modelValue", event.target.value);
+    };
+    const addTodo = () => {
+      context.emit("add");
+    };
+    return { onInput, addTodo };
   },
 });
 </script>

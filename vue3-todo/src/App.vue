@@ -4,11 +4,11 @@
       <h1>Vue3 Todo With TypeScript</h1>
     </header>
     <main>
-      <TodoInput v-model="todoText" @add="addTodoItem"></TodoInput>
+      <TodoInput v-model="state.todoText" @add="addTodoItem"></TodoInput>
       <div>
         <ul>
           <TodoListItem
-            v-for="(todoItem, index) in todoItems"
+            v-for="(todoItem, index) in state.todoItems"
             :key="index"
             :index="index"
             :todoItem="todoItem"
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, reactive } from "vue";
 import TodoListItem from "./components/TodoListItem.vue";
 import TodoInput from "./components/TodoInput.vue";
 
@@ -50,42 +50,46 @@ export interface Todo {
   done: boolean;
 }
 
+// const initTodoText = () => {
+//   state.todoText = "";
+// };
+
 export default defineComponent({
   components: { TodoInput, TodoListItem },
-  data() {
-    return {
+  setup() {
+    // vue2 에서의 data 속성과 동일함
+    const state = reactive({
       todoText: "" as string,
       todoItems: [] as Todo[],
+    });
+
+    // 할 일 전체 삭제
+    const removeAll = () => {
+      state.todoItems = [];
+      storage.save(state.todoItems);
     };
-  },
-  methods: {
-    // 할 일 목록 전체 삭제
-    removeAll() {
-      this.todoItems = [];
-      storage.save(this.todoItems);
-    },
 
     // 할 일 추가
-    addTodoItem() {
-      const value = this.todoText;
-      // console.log("add");
+    const addTodoItem = () => {
+      const value = state.todoText;
       const todo: Todo = {
         title: value,
         done: false,
       };
-      this.todoItems.push(todo);
-      storage.save(this.todoItems);
-      this.initTodoText();
-    },
+      state.todoItems.push(todo);
+      storage.save(state.todoItems);
+      initTodoText();
+      // state.todoText = "";
+    };
 
     // 입력창 초기화
-    initTodoText() {
-      this.todoText = "";
-    },
+    const initTodoText = () => {
+      state.todoText = "";
+    };
 
     // 할 일 목록 조회
-    fetchTodoItems() {
-      this.todoItems = storage.fetch().sort((a, b) => {
+    const fetchTodoItems = () => {
+      state.todoItems = storage.fetch().sort((a, b) => {
         if (a.title < b.title) {
           return -1;
         }
@@ -94,28 +98,100 @@ export default defineComponent({
         }
         return 0;
       });
-    },
+    };
 
     // 할 일 삭제
-    removeTodoItem(index: number) {
-      this.todoItems.splice(index, 1);
-      storage.save(this.todoItems);
-    },
+    const removeTodoItem = (index: number) => {
+      state.todoItems.splice(index, 1);
+      storage.save(state.todoItems);
+    };
 
-    // 할 일 상태 수정하기
-    toggleTodoItem(todoItem: Todo, index: number) {
-      this.todoItems.splice(index, 1, {
+    // 할 일 상태 수정
+    const toggleTodoItem = (todoItem: Todo, index: number) => {
+      state.todoItems.splice(index, 1, {
         ...todoItem,
-        // 기존의 상태와 반대로
+        // 기존 상태와 반대 상태로
         done: !todoItem.done,
       });
-      storage.save(this.todoItems);
-    },
-  },
+      storage.save(state.todoItems);
+    };
 
-  created() {
-    this.fetchTodoItems();
+    onMounted(() => fetchTodoItems());
+
+    return {
+      state,
+      addTodoItem,
+      initTodoText,
+      fetchTodoItems,
+      removeTodoItem,
+      toggleTodoItem,
+      removeAll,
+    };
   },
+  // data() {
+  //   return {
+  //     todoText: "" as string,
+  //     todoItems: [] as Todo[],
+  //   };
+  // },
+  // methods: {
+  //   // 할 일 목록 전체 삭제
+  //   removeAll() {
+  //     this.todoItems = [];
+  //     storage.save(this.todoItems);
+  //   },
+
+  //   // 할 일 추가
+  //   addTodoItem() {
+  //     const value = this.todoText;
+  //     // console.log("add");
+  //     const todo: Todo = {
+  //       title: value,
+  //       done: false,
+  //     };
+  //     this.todoItems.push(todo);
+  //     storage.save(this.todoItems);
+  //     this.initTodoText();
+  //   },
+
+  //   // 입력창 초기화
+  //   initTodoText() {
+  //     this.todoText = "";
+  //   },
+
+  //   // 할 일 목록 조회
+  //   fetchTodoItems() {
+  //     this.todoItems = storage.fetch().sort((a, b) => {
+  // if (a.title < b.title) {
+  //   return -1;
+  // }
+  // if (a.title < b.title) {
+  //   return 1;
+  // }
+  // return 0;
+  //     });
+  //   },
+
+  //   // 할 일 삭제
+  //   removeTodoItem(index: number) {
+  //     this.todoItems.splice(index, 1);
+  //     storage.save(this.todoItems);
+  //   },
+
+  //   // 할 일 상태 수정하기
+  //   toggleTodoItem(todoItem: Todo, index: number) {
+  //     this.todoItems.splice(index, 1, {
+  //       ...todoItem,
+  //       // 기존의 상태와 반대로
+  //       done: !todoItem.done,
+  //     });
+  //     storage.save(this.todoItems);
+  //   },
+  // },
+
+  // created() {
+  //   this.fetchTodoItems();
+  // },
 });
 </script>
 
