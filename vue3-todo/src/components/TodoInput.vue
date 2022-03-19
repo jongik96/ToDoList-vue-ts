@@ -18,8 +18,9 @@ export default defineComponent({
   props: ["modelValue"],
   methods: {
     // TodoInput 컴포넌트에서 입력하지만 입력한 데이터는 App.vue 에서 관리된다.
-    onInput(event) {
-      this.$emit("update:modelValue", event.target.value);
+    onInput(event: InputEvent) {
+      const eventTarget = event.target as HTMLInputElement;
+      this.$emit("update:modelValue", eventTarget.value);
     },
 
     // 추가 버튼 이벤트

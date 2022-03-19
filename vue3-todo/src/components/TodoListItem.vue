@@ -8,10 +8,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { Todo } from "../App.vue";
 export default defineComponent({
   props: {
-    todoItem: Object,
+    todoItem: Object as PropType<Todo>,
     index: Number,
   },
   computed: {
