@@ -12,6 +12,8 @@
             :key="index"
             :index="index"
             :todoItem="todoItem"
+            @remove="removeTodoItem"
+            @toggle="toggleTodoItem"
           ></TodoListItem>
         </ul>
       </div>
@@ -76,6 +78,22 @@ export default defineComponent({
     fetchTodoItems() {
       this.todoItems = storage.fetch();
     },
+
+    // 할 일 삭제
+    removeTodoItem(index: number) {
+      this.todoItems.splice(index, 1);
+      storage.save(this.todoItems);
+    },
+
+    // 할 일 상태 수정하기
+    toggleTodoItem(todoItem: Todo, index: number) {
+      this.todoItems.splice(index, 1, {
+        ...todoItem,
+        // 기존의 상태와 반대로
+        done: !todoItem.done,
+      });
+      storage.save(this.todoItems);
+    },
   },
 
   created() {
@@ -84,4 +102,11 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  background-color: beige;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+}
+</style>
