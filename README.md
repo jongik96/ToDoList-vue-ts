@@ -1,8 +1,8 @@
-### Branch Info
+## Branch Info
 
-vue2-complete (branch) : Vue2 + TypeScript  
-vue3-optionsAPI-complete (branch) : Vue3 (Options API) + TypeScript  
-vue3-todo-compositionsAPI (branch) : Vue3 (Composition API) + TypeScript  
+#### vue2-complete : Vue2 + TypeScript  
+#### vue3-optionsAPI-complete : Vue3 (Options API) + TypeScript  
+#### vue3-todo-compositionsAPI : Vue3 (Composition API) + TypeScript  
 
 위 3가지 브랜치의 프로젝트는 모두 동일하게 동작합니다.  
 
