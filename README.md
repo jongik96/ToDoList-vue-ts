@@ -1,12 +1,13 @@
 ## 목차
 
-### [branch 설명](#1)
+### [branch 설명](#1-브랜치)
 
-### [Options API 기반의 Vue2, Vue3 비교해보기](#2)
+### [Options API 기반의 Vue2, Vue3 비교해보기](#2-vue2=>vue3)
 
 ### [Vu3 - Options API 와 Composition API 비교해보기](#3)
 
-#1
+
+#1 브랜치
 ## Branch Info
 
 #### vue2-complete : Vue2 + TypeScript  
@@ -19,7 +20,7 @@ TodoApp 을 위와 같은 기술을 적용해 제작했습니다.
 Vue 에 TypeScript 를 적용해보는 것, Vue2 와 Vue3 의 차이, 그리고 Vue3 의 Options API 와 Compositions API 의 차이를 이해하며 진행했습니다.
 
 
-#2
+#2 Vue2=>Vue3
 # TypeScript 를 적용해 Vue2, Vue3 만든 TodoApp 비교
 
 Inflearn 강좌 "Vue.js+TypeScript 완벽가이드" (장기효) 를 참고하며 제작한 **Vue2** 버전의 TodoApp 을 **Vue3 Options API** 기반으로 다시 제작해보았습니다.
