@@ -1,7 +1,13 @@
 <template>
   <div>
     <label for="todo-input">오늘 할 일 : </label>
-    <input id="todo-input" :value="modelValue" type="text" @input="onInput" />
+    <input
+      id="todo-input"
+      :value="modelValue"
+      type="text"
+      @input="onInput"
+      @keyup.enter="addTodo"
+    />
     <button class="btn" @click="addTodo" type="button">추가</button>
   </div>
 </template>
@@ -24,4 +30,11 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  background-color: beige;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+}
+</style>

@@ -3,7 +3,7 @@
     <span class="item" :class="todoItemClass" @click="toggleItem">{{
       todoItem.title
     }}</span>
-    <button type="button" @click="removeItem">삭제</button>
+    <button class="btn" type="button" @click="removeItem">삭제</button>
   </li>
 </template>
 

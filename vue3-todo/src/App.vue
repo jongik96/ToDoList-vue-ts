@@ -17,6 +17,9 @@
           ></TodoListItem>
         </ul>
       </div>
+      <div>
+        <button class="btn" @click="removeAll" type="button">전체 삭제</button>
+      </div>
     </main>
   </div>
 </template>
@@ -56,6 +59,12 @@ export default defineComponent({
     };
   },
   methods: {
+    // 할 일 목록 전체 삭제
+    removeAll() {
+      this.todoItems = [];
+      storage.save(this.todoItems);
+    },
+
     // 할 일 추가
     addTodoItem() {
       const value = this.todoText;
@@ -76,7 +85,15 @@ export default defineComponent({
 
     // 할 일 목록 조회
     fetchTodoItems() {
-      this.todoItems = storage.fetch();
+      this.todoItems = storage.fetch().sort((a, b) => {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title < b.title) {
+          return 1;
+        }
+        return 0;
+      });
     },
 
     // 할 일 삭제
